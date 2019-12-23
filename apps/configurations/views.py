@@ -35,13 +35,18 @@ class ClassificationForm(View):
     second_form_class = Element_Classification_Form
 
     def post(self, request, *args, **kwargs):
-        form2=self.second_form_class(request.POST)
+        form2 = self.second_form_class(request.POST)
         if form2.is_valid():
             post = form2.save(commit=False)
             post.save()
             return redirect(reverse_lazy('configurations:element_type_list'))  
 
-class ClassificationDelete(DeleteView):
-    model = Element_Classification
+class ClassificationDelete(View):
+    
     template_name = 'element_type_list.html'
-    success_url = reverse_lazy('configurations:element_type_list')
+    def post(self, request, *args, **kwargs):
+        model = Element_Classification
+        pk = request.POST['element_type_id']
+        data = model.objects.get(id = pk)
+        data.delete()
+        return redirect(reverse_lazy('configurations:element_type_list'))
