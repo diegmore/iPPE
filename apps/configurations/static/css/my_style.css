@@ -1,0 +1,20 @@
+.footerStyle{
+    position: absolute;  
+    top: 80%; 
+    display:flex;
+    justify-content: center;
+    /* border:10px red solid; */
+    width: 82%;
+}
+.logoiXerv{
+    width: 15rem; 
+    /* border:10px blue solid;  */
+    padding: 0 20px 0 0 ;
+    /* float: left; */
+}
+.copyRight{
+    position: relative;
+    /* border: 10px rebeccapurple  solid; */
+    justify-content: left;
+    padding: 0 70% 0 0 ;
+}
