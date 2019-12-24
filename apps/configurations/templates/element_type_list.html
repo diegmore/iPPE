@@ -53,7 +53,15 @@
                         <td>{{ configurations.description }}</td>
                         <td>{{ configurations.element_type.code }}</td>
                         <td>{{ configurations.create_date}} </td>
-                        <td>{{ configurations.status }}</td>
+                        <td>
+                        <div class="text-center"> 
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled">
+                            </label>
+                          </div>
+                        </div>
+                        </td>
                         <td> 
                           <a class="btn btn-primary" href="{%url 'configurations:update_element_classification' configurations.id%}"  >Edit</a>
                           <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#Modal_element_delete" data-pk="{{ configurations.id }}">Delete</a>              
