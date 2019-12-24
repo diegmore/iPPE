@@ -26,7 +26,7 @@
                       <th>Name</th>
                       <th>Description</th>
 					  <th>Type</th>
-					  <th>Create Date</th>
+					  <th>Create/Edit Date</th>
 					  <th>Status</th>
 					  <th>Actions</th>
                     </tr>
@@ -55,7 +55,7 @@
                         <td>{{ configurations.create_date}} </td>
                         <td>{{ configurations.status }}</td>
                         <td> 
-                          <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#Modal_element_update" data-pk="{{ configurations.id }}">Edit</a>
+                          <a class="btn btn-primary" href="{%url 'configurations:update_element_classification' configurations.id%}"  >Edit</a>
                           <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#Modal_element_delete" data-pk="{{ configurations.id }}">Delete</a>              
                         </td>
                       </tr>
@@ -71,7 +71,7 @@
 
         </div>
 {% comment %} Element type Modal {% endcomment %}
-<div class="modal fade" id="Modal_element_type" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Modal_element_type" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -103,7 +103,7 @@
   </div>
 </div>
 {% comment %} Element classification Modal {% endcomment %}
-<div class="modal fade" id="Modal_element_class" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Modal_element_class" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -114,32 +114,32 @@
       </div>
       <div class="modal-body">
         <form action="element_classification" method="post">
-			{% csrf_token %}
+			    {% csrf_token %}
           <div class="form-group">
-					<label for="{{form2.code.id_for_label}}">{{form2.code.label}}</label>
-					{{form2.code}}
-			</div>
-          	<div class="form-group">
-					<label for="{{form2.name.id_for_label}}">{{form2.name.label}}</label>
-					{{form2.name}}
-			</div>
-			<div class="form-group">
-					<label for="{{form2.description.id_for_label}}">{{form2.description.label}}</label>
-					{{form2.description}}
-			</div>
-			<div class="form-group">
-					<label for="{{form2.element_type.id_for_label}}">{{form2.element_type.label}}</label>
-					{{form2.element_type}}
-			</div>
-			<button type="submit" class="btn btn-primary">Save</button>
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <label for="{{form2.code.id_for_label}}">{{form2.code.label}}</label>
+            {{form2.code}}
+			    </div>
+          <div class="form-group">
+            <label for="{{form2.name.id_for_label}}">{{form2.name.label}}</label>
+            {{form2.name}}
+			    </div>
+          <div class="form-group">
+              <label for="{{form2.description.id_for_label}}">{{form2.description.label}}</label>
+              {{form2.description}}
+          </div>
+          <div class="form-group">
+              <label for="{{form2.element_type.id_for_label}}">{{form2.element_type.label}}</label>
+              {{form2.element_type}}
+          </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </form>
       </div>      
     </div>
   </div>
 </div>
 {% comment %} Delete Modal {% endcomment %}
-<div class="modal fade" id="Modal_element_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="Modal_element_delete" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -163,42 +163,7 @@
     </div>
   </div>
 </div>
-{% comment %} Update Modal {% endcomment %}
-<div class="modal fade" id="Modal_element_update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Update Element Class</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="element_classification" method="post">
-			{% csrf_token %}
-          <div class="form-group">
-					<label for="{{form2.code.id_for_label}}">{{form2.code.label}}</label>
-					{{form2.code}}
-			</div>
-          	<div class="form-group">
-					<label for="{{form2.name.id_for_label}}">{{form2.name.label}}</label>
-					{{form2.name}}
-			</div>
-			<div class="form-group">
-					<label for="{{form2.description.id_for_label}}">{{form2.description.label}}</label>
-					{{form2.description}}
-			</div>
-			<div class="form-group">
-					<label for="{{form2.element_type.id_for_label}}">{{form2.element_type.label}}</label>
-					{{form2.element_type}}
-			</div>
-			<button type="submit" class="btn btn-primary">Save</button>
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </form>
-      </div>      
-    </div>
-  </div>
-</div>
+
 {% endblock%}
 
 

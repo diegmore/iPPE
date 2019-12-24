@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView, View
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
+from datetime import date
 
 from .models import Element_Type, Element_Classification
 from .forms import Element_Type_Form, Element_Classification_Form
+
 # Create your views here.
 class ClassificationList(ListView):
     model : Element_Classification
@@ -41,12 +43,18 @@ class ClassificationForm(View):
             post.save()
             return redirect(reverse_lazy('configurations:element_type_list'))  
 
-class ClassificationDelete(View):
-    
+class ClassificationDelete(View):     
     template_name = 'element_type_list.html'
+
     def post(self, request, *args, **kwargs):
         model = Element_Classification
         pk = request.POST['element_type_id']
         data = model.objects.get(id = pk)
         data.delete()
         return redirect(reverse_lazy('configurations:element_type_list'))
+
+class ClassificationUpdate(UpdateView):    
+    model = Element_Classification
+    form_class = Element_Classification_Form    
+    template_name = 'element_form.html'
+    success_url = reverse_lazy('configurations:element_type_list')
