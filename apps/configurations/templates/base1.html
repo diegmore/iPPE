@@ -331,17 +331,7 @@
 
         </nav>
         <!-- End of Topbar -->
-        {% block content %}
-        <div class="well well-sm">
-         Esté es el contenido del archivo base.
-        </div>
-        {% comment %} Modal block {% endcomment %}
-        
-        {% endblock %}
-        
-        
-
-      <!-- Footer -->
+        <!-- Footer -->
       <footer class="bg-white footerStyle" >
         <div class="container my-auto ">
           <div class="copyright text-center my-auto">
@@ -353,7 +343,14 @@
         </div>
       </footer>    
       <!-- End of Footer -->
-
+        {% block content %}
+        <div class="well well-sm">
+         Esté es el contenido del archivo base.
+        </div>
+        {% comment %} Modal block {% endcomment %}
+        
+        {% endblock %}
+      
     </div>
      
   </div>
@@ -386,7 +383,6 @@
   <!-- Bootstrap core JavaScript-->
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
   <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
@@ -400,9 +396,24 @@
   <!-- Page level custom scripts -->
   <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
   <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
-
-  
-
+  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>  
+  {% autoescape on %}
+      <script>
+          var token = '{{csrf_token}}';
+          $(".ClassificationStatus").change(function () {
+          var urlToAjax = $(this).data('changestatus');
+              $.ajax({
+                  headers: { "X-CSRFToken": token },
+                  url: urlToAjax,
+                  type: 'POST',
+                  data: "status="+$(this).prop("checked"),
+                  dataType: 'json',
+                  success: function (data) {
+                      console.info(data);
+                  }
+              });
+          });
+      </script>
+  {% endautoescape %}
 </body>
-
 </html>
