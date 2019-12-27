@@ -11,7 +11,7 @@ from .forms import Element_Type_Form, Element_Classification_Form
 # Create your views here.
 class ClassificationList(ListView):
     model : Element_Classification
-    template_name = 'element_type_list.html'
+    template_name = 'element_classification_list.html'
     form_class = Element_Type_Form
     second_form_class = Element_Classification_Form
 
@@ -70,3 +70,21 @@ class UpdateStatus(View):
         except Exception as e:
             msg = '%s (%s)' % (e.message, type(e))
         return JsonResponse({'response':msg})
+
+class TypeList(ListView):
+    model : Element_Type
+    template_name = 'type_list.html'
+    form_class = Element_Type_Form
+
+    def get_queryset(self):
+        return Element_Type.objects.order_by('id')
+
+class TypeDelete(View):     
+    template_name = 'element_type_list.html'
+
+    def post(self, request, *args, **kwargs):
+        model = Element_Type
+        pk = request.POST['element_type_id']
+        data = model.objects.get(id = pk)
+        data.delete()
+        return redirect(reverse_lazy('configurations:type_list'))

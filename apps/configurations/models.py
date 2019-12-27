@@ -16,4 +16,4 @@ class Element_Classification(models.Model):
     description = models.TextField(max_length=50)
     status = models.BooleanField(null=True)
     create_date = models.DateField(blank=True, null=True, auto_now=True)
-    element_type = models.ForeignKey(Element_Type, null=True,blank=True, on_delete=models.CASCADE)
+    element_type = models.ForeignKey(Element_Type, null=True, blank=True, on_delete=models.SET_NULL)

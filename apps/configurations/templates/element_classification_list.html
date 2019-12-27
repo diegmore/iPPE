@@ -1,83 +1,90 @@
 {% extends 'base1.html' %}
 
+
+
 {% block content %}
 
-<div class="dropdown" style="text-align: right;">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Create
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Modal_element_type">Element Type</a>
-    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Modal_element_class">Element Class</a>
-  </div>
+<div class="topButtons">
+    <div class="dropdown" style="text-align: right; margin:10px">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Create
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Modal_element_type">Element Type</a>
+        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Modal_element_class">Element Class</a>
+      </div>
+    </div>
+      <a href="{% url 'configurations:type_list'%}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin:10px"> Generate Report</a>
 </div>
 
+
 <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Element Classification</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Code</th>
-                      <th>Name</th>
-                      <th>Description</th>
-					  <th>Type</th>
-					  <th>Create/Edit Date</th>
-					  <th>Status</th>
-					  <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>#</th>
-                      <th>Code</th>
-                      <th>Name</th>
-					  <th>Description</th>
-					  <th>Type</th>
-					  <th>Create Date</th>
-					  <th>Status</th>
-					  <th>Actions</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    {% if object_list %}
-                      {% for configurations in object_list %}
-                      <tr>
-                        <td>{{ configurations.id }}</td>
-                        <td>{{ configurations.code }} </td>
-                        <td>{{ configurations.name }} </td>
-                        <td>{{ configurations.description }}</td>
-                        <td>{{ configurations.element_type.code }}</td>
-                        <td>{{ configurations.create_date}} </td>
-                        <td>
-                        <div class="text-center"> 
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" class="ClassificationStatus" data-changestatus="{% url 'configurations:update_status' pk=configurations.id %}" data-toggle="toggle" data-on="On" data-off="Off" {% if configurations.status is True %}checked{% endif %}>                              
-                            </label>
-                          </div>
-                        </div>
-                        </td>
-                        <td> 
-                          <a class="btn btn-primary" href="{%url 'configurations:update_element_classification' configurations.id%}">Edit</a>
-                          <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#Modal_element_delete" data-pk="{{ configurations.id }}">Delete</a>              
-                        </td>
-                      </tr>
-                      {% endfor %}		
-                    {% else %}
-                    <h1>No hay registros de solicitudes</h1>
-                    {% endif %}                 
-                  </tbody>
-                </table>
+<div class="card-header py-3">
+  <h6 class="m-0 font-weight-bold text-primary">Element Classification</h6>
+</div>
+{% if object_list %}
+<div class="card-body">
+  <div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Description</th>
+<th>Type</th>
+<th>Create/Edit Date</th>
+<th>Status</th>
+<th>Actions</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <th>#</th>
+          <th>Code</th>
+          <th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>Create Date</th>
+<th>Status</th>
+<th>Actions</th>
+        </tr>
+      </tfoot>
+      <tbody>
+        
+          {% for configurations in object_list %}
+          <tr>
+            <td>{{ configurations.id }}</td>
+            <td>{{ configurations.code }} </td>
+            <td>{{ configurations.name }} </td>
+            <td>{{ configurations.description }}</td>
+            <td>{{ configurations.element_type.code }}</td>
+            <td>{{ configurations.create_date}} </td>
+            <td>
+            <div class="text-center"> 
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" class="ClassificationStatus" data-changestatus="{% url 'configurations:update_status' pk=configurations.id %}" data-toggle="toggle" data-on="On" data-off="Off" {% if configurations.status is True %}checked{% endif %}>                              
+                </label>
               </div>
             </div>
-          </div>
-
-        </div>
+            </td>
+            <td> 
+              <a class="btn btn-primary" href="{%url 'configurations:update_element_classification' configurations.id%}">Edit</a>
+              <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#Modal_element_delete" data-pk="{{ configurations.id }}">Delete</a>              
+            </td>
+          </tr>
+          {% endfor %}		
+                        
+      </tbody>
+    </table>
+  </div>
+</div>
+{% else %}
+  <h1>There are no request records</h1>
+{% endif %} 
+</div>
+</div>
 {% comment %} Element type Modal {% endcomment %}
 <div class="modal fade" id="Modal_element_type" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
