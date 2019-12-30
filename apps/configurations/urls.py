@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.urls import path,include
 from .views import ClassificationList, ClassificationForm, ClassificationDelete, ClassificationUpdate, UpdateStatus,\
-	TypeList, TypeDelete, SimpleView
+	TypeList, TypeDelete, SimpleView, TypeUpdate
 app_name = 'config'
 urlpatterns = [
 	path('', SimpleView, name='simple_view'),
@@ -12,4 +12,5 @@ urlpatterns = [
 	path('updatestatus/<int:pk>/', UpdateStatus.as_view(), name='update_status'),
 	path('type_list', TypeList.as_view(), name='type_list'),
 	path('delete_element_type', TypeDelete.as_view(), name='delete_element_type'),
+	path('update_type/<int:pk>/', TypeUpdate.as_view(), name='update_type'),
 ]

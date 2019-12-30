@@ -59,7 +59,7 @@
             <div class="text-center"> 
               <div class="checkbox">
                 <label>                  
-                  <input type="checkbox" class="ClassificationStatus" data-changestatus="{% url 'configurations:update_status' pk=configurations.id %}" data-toggle="toggle" data-on="On" data-off="Off" {% if configurations.status is True %}checked{% endif %} >                              
+                  <input type="checkbox" class="ClassificationStatus" data-changestatus="{% url 'configurations:update_status' pk=configurations.id %}" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning" {% if configurations.status is True %}checked{% endif %}>                   
                 </label>
               </div>
             </div>

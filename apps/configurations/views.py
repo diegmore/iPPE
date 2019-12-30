@@ -79,6 +79,20 @@ class TypeList(ListView):
     def get_queryset(self):
         return Element_Type.objects.order_by('id')
 
+    def get_context_data(self, **kwargs):
+        context = super(TypeList, self).get_context_data(**kwargs)
+        pk = self.kwargs.get('pk', 0)
+        context['form'] = Element_Type_Form()
+        context['id'] = pk
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        form=self.form_class(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect(reverse_lazy('configurations:type_list'))
+
 class TypeDelete(View):     
     template_name = 'element_type_list.html'
 
@@ -88,6 +102,12 @@ class TypeDelete(View):
         data = model.objects.get(id = pk)
         data.delete()
         return redirect(reverse_lazy('configurations:type_list'))
+
+class TypeUpdate(UpdateView):    
+    model = Element_Type
+    form_class = Element_Type_Form    
+    template_name = 'type_edit.html'
+    success_url = reverse_lazy('configurations:type_list')
 
 def SimpleView(request):
     return render(request,'base1.html')

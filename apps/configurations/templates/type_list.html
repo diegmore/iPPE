@@ -1,6 +1,9 @@
 {% extends 'base1.html' %}
 {% block content %}
-<div class="card shadow mb-4">
+<div class="topButtons ListPosition">
+  <a href="{% url 'configurations:type_list'%}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin:10px" data-toggle="modal" data-target="#Modal_element_type">Create Element Type</a>
+</div>
+<div class="card shadow mb-4 ListPosition">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Element Type</h6>
     </div>
@@ -34,7 +37,7 @@
                 <td>{{ configurations.name }} </td>
                 <td>{{ configurations.description }}</td>
                 <td> 
-                    <a class="btn btn-primary" href="{%url 'configurations:update_element_classification' configurations.id%}">Edit</a>
+                    <a class="btn btn-primary" href="{%url 'configurations:update_type' configurations.id%}">Edit</a>
                     <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#Modal_element_delete" data-pk="{{ configurations.id }}">Delete</a>              
                 </td>
                 </tr>
@@ -69,6 +72,39 @@
           <button type="submit" class="btn btn-danger" name="element_type_id" id="delete" value="">Delete </button>
         </form>
       </div>
+      </div>      
+    </div>
+  </div>
+</div>
+
+{% comment %} Element type Modal {% endcomment %}
+<div class="modal fade" id="Modal_element_type" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Element Type</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+			{% csrf_token %}
+          	<div class="form-group">
+					<label for="{{form.code.id_for_label}}">{{form.code.label}}</label>
+					{{form.code}}
+			</div>
+          	<div class="form-group">
+					<label for="{{form.name.id_for_label}}">{{form.name.label}}</label>
+					{{form.name}}
+			</div>
+			<div class="form-group">
+					<label for="{{form.description.id_for_label}}">{{form.description.label}}</label>
+					{{form.description}}
+			</div>
+			<button type="submit" class="btn btn-primary">Save</button>
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </form>
       </div>      
     </div>
   </div>
