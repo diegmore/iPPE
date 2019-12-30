@@ -1,11 +1,4 @@
-.footerStyle{
-    position: absolute;  
-    top: 80%; 
-    display:flex;
-    justify-content: center;
-    /* border:10px red solid;  */
-    width: 82%;
-}
+
 .logoiXerv{
     width: 15rem; 
     /* border:10px blue solid;  */
@@ -22,4 +15,21 @@
 .topButtons{
     display:flex; 
     flex-direction: row-reverse;
+}
+
+.AdjustForm{
+    position: relative;
+    left: 300px;
+    /* border:10px blue solid;  */
+}
+.ListPosition{
+    position: relative;
+    top: -80px;
+}
+.footerStyle{
+    position: relative;  
+    top: 75%; 
+    display:flex;
+    justify-content: center;
+    width: 82%;
 }

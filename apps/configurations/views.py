@@ -31,7 +31,7 @@ class ClassificationList(ListView):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect(reverse_lazy('configurations:element_type_list'))        
+            return redirect(reverse_lazy('configurations:element_classification'))        
 
 class ClassificationForm(View):
     template_name = 'element_type_list.html'
@@ -42,7 +42,7 @@ class ClassificationForm(View):
         if form2.is_valid():
             post = form2.save(commit=False)
             post.save()
-            return redirect(reverse_lazy('configurations:element_type_list'))  
+            return redirect(reverse_lazy('configurations:element_classification'))  
 
 class ClassificationDelete(View):     
     template_name = 'element_type_list.html'
@@ -52,13 +52,13 @@ class ClassificationDelete(View):
         pk = request.POST['element_type_id']
         data = model.objects.get(id = pk)
         data.delete()
-        return redirect(reverse_lazy('configurations:element_type_list'))
+        return redirect(reverse_lazy('configurations:element_classification'))
 
 class ClassificationUpdate(UpdateView):    
     model = Element_Classification
     form_class = Element_Classification_Form    
     template_name = 'element_form.html'
-    success_url = reverse_lazy('configurations:element_type_list')
+    success_url = reverse_lazy('configurations:element_classification')
 
 class UpdateStatus(View):
     def post(self, request, pk):
@@ -88,3 +88,6 @@ class TypeDelete(View):
         data = model.objects.get(id = pk)
         data.delete()
         return redirect(reverse_lazy('configurations:type_list'))
+
+def SimpleView(request):
+    return render(request,'base1.html')
