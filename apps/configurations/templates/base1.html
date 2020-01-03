@@ -72,6 +72,7 @@
             <h6 class="collapse-header">Available Configurations:</h6>
             <a class="collapse-item" href="{% url 'configurations:type_list'%}">Element Type</a>
             <a class="collapse-item" href="{% url 'configurations:element_classification'%}">Element Classification</a>
+            <a class="collapse-item" href="{% url 'body_config:body_part'%}">Body Part</a>
           </div>
         </div>
       </li>
@@ -407,6 +408,23 @@
       <script>
           var token = '{{csrf_token}}';
           $(".ClassificationStatus").change(function () {
+          var urlToAjax = $(this).data('changestatus');
+              $.ajax({
+                  headers: { "X-CSRFToken": token },
+                  url: urlToAjax,
+                  type: 'POST',
+                  data: "status="+$(this).prop("checked"),
+                  dataType: 'json',
+                  success: function (data) {
+                      console.info(data);
+                  }
+              });
+          });
+      </script>
+
+      <script>
+          var token = '{{csrf_token}}';
+          $(".BodyStatus").change(function () {
           var urlToAjax = $(this).data('changestatus');
               $.ajax({
                   headers: { "X-CSRFToken": token },

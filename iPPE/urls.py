@@ -19,4 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('config/', include('apps.configurations.urls', namespace='configurations')),
+    path('config/', include('apps.body_configuration.urls', namespace='body_configurations')),
+    # path('config/', include('apps.size_configuration.urls', namespace='size_configurations')),
 ]
