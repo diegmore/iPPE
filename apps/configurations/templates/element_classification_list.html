@@ -1,16 +1,11 @@
 {% extends 'base1.html' %}
 {% block content %}
 <div class="topButtons ListPosition">
-    <div class="dropdown" style="text-align: right; margin:10px">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Create
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Modal_element_type">Element Type</a>
-        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Modal_element_class">Element Class</a>
-      </div>
+    <div style="text-align: right; margin:10px">
+      {% comment %} <a class="dropdown-item" href="#" data-toggle="modal" data-target="#Modal_element_class">Element Class</a> {% endcomment %}
+      <a class="btn btn-primary" href="{% url 'configurations:element_classification_create'%}" >Create Element Class</a>
     </div>
-      <a href="{% url 'configurations:type_list'%}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="margin:10px"> View Element Type</a>
+      <a href="{% url 'configurations:type_list'%}" class="btn btn-secondary" style="margin:10px"> View Element Type</a>
 </div>
 
 
@@ -121,7 +116,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="element_classification" method="post">
+        <form action="element_classification_form" method="post">
 			    {% csrf_token %}
           <div class="form-group">
             <label for="{{form2.code.id_for_label}}">{{form2.code.label}}</label>

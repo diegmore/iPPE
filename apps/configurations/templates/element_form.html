@@ -27,9 +27,17 @@
             </div>
         </div>
     </div>
+    <div class="row">
+		<div class="col-md-6 col-md-offset-2 AdjustForm">
+            <div class="form-group">
+              <label for="{{form2.element_type.id_for_label}}">{{form2.element_type.label}}</label>
+              {{form2.element_type}}
+          </div>
+        </div>
+    </div>
     <div class="AdjustForm">
-        <button type="submit" class="btn btn-primary">Save Changes</button>
-        <button class="btn btn-secondary" href="{%url 'configurations:update_type' %}">Cancel</button>
+        <button type="submit" class="btn btn-primary" >Save Changes</button>
+        <button type="submit" class="btn btn-secondary" formnovalidate name="cancel">Cancel</button>
     </div>
     </form>
 {% endblock %}

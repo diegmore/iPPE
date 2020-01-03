@@ -1,0 +1,10 @@
+{% extends 'base1.html' %}
+{% block content %}
+<div class="text-center"> 
+    <div class="checkbox">
+    <label>                  
+        <input type="checkbox" class="ClassificationStatus"  data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning" {% if configurations.status is True %}checked{% endif %}>                   
+    </label>
+    </div>
+</div>
+{% endblock %}

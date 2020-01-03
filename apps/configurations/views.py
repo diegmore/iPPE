@@ -31,13 +31,37 @@ class ClassificationList(ListView):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect(reverse_lazy('configurations:element_classification'))        
+            return redirect(reverse_lazy('configurations:element_classification'))
+
+class ClassificationCreate(CreateView):
+    model = Element_Classification
+    template_name = 'element_form.html'
+    form_class = Element_Type_Form
+    second_form_class = Element_Classification_Form
+
+    def get_context_data(self, **kwargs):
+        context = super(ClassificationCreate, self).get_context_data(**kwargs)
+        pk = self.kwargs.get('pk', 0)
+        context['form'] = Element_Type_Form()
+        context['form2'] = Element_Classification_Form()
+        context['id'] = pk
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return redirect(reverse_lazy('configurations:element_classification'))
+        else:
+            form2 = self.second_form_class(request.POST)
+            if form2.is_valid():
+                post = form2.save(commit=False)
+                post.save()
+                return redirect(reverse_lazy('configurations:element_classification'))
 
 class ClassificationForm(View):
     template_name = 'element_type_list.html'
     second_form_class = Element_Classification_Form
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):        
         form2 = self.second_form_class(request.POST)
         if form2.is_valid():
             post = form2.save(commit=False)
@@ -56,9 +80,27 @@ class ClassificationDelete(View):
 
 class ClassificationUpdate(UpdateView):    
     model = Element_Classification
-    form_class = Element_Classification_Form    
+    second_model = Element_Type  
     template_name = 'element_form.html'
-    success_url = reverse_lazy('configurations:element_classification')
+    success_url = reverse_lazy('configurations:element_classification')    
+    form_class = Element_Classification_Form
+    second_form_class = Element_Type_Form 
+
+    def get_context_data(self, **kwargs):
+        context = super(ClassificationUpdate, self).get_context_data(**kwargs)
+        pk = self.kwargs.get('pk', 0)
+        classification = self.model.objects.get(id = pk)        
+        if not classification.element_type_id:        
+            context['form'] = Element_Type_Form(instance=classification)
+            context['form2'] = Element_Classification_Form()
+            context['id'] = pk
+            return context
+        else:
+            etype = Element_Type.objects.get(id = classification.element_type_id)
+            context['form'] = Element_Type_Form(instance=etype)
+            context['form2'] = Element_Classification_Form(instance=classification)
+            context['id'] = pk
+            return context
 
 class UpdateStatus(View):
     def post(self, request, pk):
@@ -93,6 +135,21 @@ class TypeList(ListView):
             post.save()
             return redirect(reverse_lazy('configurations:type_list'))
 
+class TypeCreate(CreateView):
+    model = Element_Type
+    form_class = Element_Type_Form
+    template_name = 'type_edit.html'
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return redirect(reverse_lazy('configurations:type_list'))
+        else:
+            form = self.form_class(request.POST)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.save()
+                return redirect(reverse_lazy('configurations:type_list'))
+
 class TypeDelete(View):     
     template_name = 'element_type_list.html'
 
@@ -110,4 +167,4 @@ class TypeUpdate(UpdateView):
     success_url = reverse_lazy('configurations:type_list')
 
 def SimpleView(request):
-    return render(request,'base1.html')
+    return render(request,'index.html')
