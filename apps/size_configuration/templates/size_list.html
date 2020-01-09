@@ -1,0 +1,109 @@
+{% extends 'base1.html' %}
+{% block content %}
+<div class="SizetopButtons ListPosition" >
+  <div class="dropdown">
+    
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ filt }}
+      </button>
+    
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="{% url 'size_config:size_list'%}">All</a>
+      {% for configuration in body_part %}
+        <a class="dropdown-item" href="?filter={{ configuration.id }}">{{ configuration.name }}</a>
+      {% endfor %} 
+    </div>
+  </div>
+  <div>
+    <a href="{% url 'size_config:size_create'%}" class="btn btn-primary" >Create Size</a>
+  </div>
+</div>
+
+<div class="card shadow mb-4 ListPosition">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Size List</h6>
+    </div>
+    {% if object_list %}
+    <div class="card-body">
+        <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Code</th>
+                <th>Gender</th>
+                <th>Body Area</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <th>#</th>
+                <th>Code</th>
+                <th>Gender</th>
+                <th>Body Area</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </tfoot>
+            <tbody>                    
+                {% for configurations in object_list %}
+                <tr>
+                    <td>{{ configurations.id }}</td>
+                    <td>{{ configurations.code }} </td>
+                    <td>{{ configurations.gender }} </td>
+                    <td>{{ configurations.body_area.name }} </td>
+                    <td>{{ configurations.description }}</td>
+                    <td>
+                    <div class="text-center"> 
+                    <div class="checkbox">
+                        <label>                  
+                        <input type="checkbox" class="BodyStatus" data-changestatus="{% url 'size_config:size_status' pk=configurations.id %}" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning" {% if configurations.status is True %}checked{% endif %}>                   
+                        </label>
+                    </div>
+                    </div>
+                    </td>
+                    <td> 
+                    <a class="btn btn-primary" href="{%url 'size_config:size_update' configurations.id%}">Edit</a>
+                    <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#Modal_element_delete" data-pk="{{configurations.id}}">Delete</a>              
+                    </td>
+                </tr>
+                {% endfor %}                                  
+            </tbody>
+        </table>
+        </div>
+    </div>
+    {% else %}
+        <h1>There are no request records</h1>
+    {% endif %}  
+    </div>
+ </div>
+{% comment %} Delete Modal {% endcomment %}
+<div class="modal fade" id="Modal_element_delete" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="icon-box">
+          <i class="material-icons"></i>
+        </div>        
+        <h4 class="modal-title">Are you sure? </h4>  
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>                
+      </div>
+      <div class="modal-body">
+        <p>Do you really want to delete these records? This process cannot be undone.</p>  
+			</div>
+			<div class="modal-footer">
+        <form action="{% url 'size_config:size_delete' %}" method="POST">
+          {% csrf_token %}        
+          <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-danger" name="body_part_id" id="delete" value="">Delete </button>
+        </form>
+      </div>
+      </div>      
+    </div>
+  </div>
+</div>
+{% endblock%}

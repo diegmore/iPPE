@@ -7,3 +7,5 @@ class BodyPart(models.Model):
     description = models.TextField(max_length=50)
     status = models.BooleanField(null=True)
     create_date = models.DateField(blank=True, null=True, auto_now=True)
+    def __str__(self):
+	    return '%s-%s'%(self.code,self.name)

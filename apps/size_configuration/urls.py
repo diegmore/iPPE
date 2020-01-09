@@ -1,20 +1,13 @@
 from django.conf.urls import url
 from django.urls import path,include
-# from .views import ClassificationList, ClassificationForm, ClassificationDelete, ClassificationUpdate, UpdateStatus,\
-# 	TypeList, TypeDelete, SimpleView, TypeUpdate, ClassificationCreate, TypeCreate
+from .views import SizeList, SizeCreate, SizeUpdate, SizeDelete, SizeStatus
 
-# app_name = 'size_config'
+app_name = 'size_config'
 
-# urlpatterns = [
-# 	path('', SimpleView, name='simple_view'),
-# 	path('element_classification', ClassificationList.as_view(), name='element_classification'),
-# 	path('element_classification_create', ClassificationCreate.as_view(), name='element_classification_create'),
-# 	path('element_classification_form', ClassificationForm.as_view(), name='element_classification_form'),
-# 	path('delete_element_classification', ClassificationDelete.as_view(), name='delete_element_classification'),
-# 	path('update/<int:pk>/', ClassificationUpdate.as_view(), name='update_element_classification'),
-# 	path('updatestatus/<int:pk>/', UpdateStatus.as_view(), name='update_status'),
-# 	path('type_list', TypeList.as_view(), name='type_list'),
-# 	path('type_create', TypeCreate.as_view(), name='type_create'),
-# 	path('delete_element_type', TypeDelete.as_view(), name='delete_element_type'),
-# 	path('update_type/<int:pk>/', TypeUpdate.as_view(), name='update_type'),
-# ]
+urlpatterns = [
+    path('size_list', SizeList.as_view(), name='size_list'),
+    path('size_create', SizeCreate.as_view(), name='size_create'),
+    path('size_update/<int:pk>/', SizeUpdate.as_view(), name='size_update'),
+    path('size_delete', SizeDelete.as_view(), name='size_delete'),
+    path('size_status/<int:pk>/', SizeStatus.as_view(), name='size_status'),
+]
