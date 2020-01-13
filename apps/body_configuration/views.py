@@ -12,7 +12,6 @@ from .forms import Body_Part_Form
 class BodyPartList(ListView):
     model : BodyPart
     template_name = 'body_list.html'
-    form_class = Body_Part_Form
 
     def get_queryset(self):
         return BodyPart.objects.order_by('id')

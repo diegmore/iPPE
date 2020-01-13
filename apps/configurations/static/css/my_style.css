@@ -33,3 +33,16 @@
     justify-content: center;
     width: 82%;
 }
+.SizetopButtons{
+    display:flex; 
+    flex-direction: row;
+    justify-content: space-between;
+    margin:10px
+}
+.equipmentForm{
+    display: flex;
+    flex-direction: row;
+    /* border:10px blue solid; */
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}

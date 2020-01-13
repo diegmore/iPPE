@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'apps.body_configuration',
     'apps.size_configuration',
     'apps.RequestType',
+    'apps.equipment',
 ]
 
 MIDDLEWARE = [
