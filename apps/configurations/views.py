@@ -12,26 +12,26 @@ from .forms import Element_Type_Form, Element_Classification_Form
 class ClassificationList(ListView):
     model : Element_Classification
     template_name = 'element_classification_list.html'
-    form_class = Element_Type_Form
-    second_form_class = Element_Classification_Form
+    # form_class = Element_Type_Form
+    # second_form_class = Element_Classification_Form
 
     def get_queryset(self):
         return Element_Classification.objects.order_by('id')
     
-    def get_context_data(self, **kwargs):
-        context = super(ClassificationList, self).get_context_data(**kwargs)
-        pk = self.kwargs.get('pk', 0)
-        context['form'] = Element_Type_Form()
-        context['form2'] = Element_Classification_Form()
-        context['id'] = pk
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(ClassificationList, self).get_context_data(**kwargs)
+    #     pk = self.kwargs.get('pk', 0)
+    #     context['form'] = Element_Type_Form()
+    #     context['form2'] = Element_Classification_Form()
+    #     context['id'] = pk
+    #     return context
 
-    def post(self, request, *args, **kwargs):
-        form=self.form_class(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.save()
-            return redirect(reverse_lazy('configurations:element_classification'))
+    # def post(self, request, *args, **kwargs):
+    #     form=self.form_class(request.POST)
+    #     if form.is_valid():
+    #         post = form.save(commit=False)
+    #         post.save()
+    #         return redirect(reverse_lazy('configurations:element_classification'))
 
 class ClassificationCreate(CreateView):
     model = Element_Classification
@@ -114,7 +114,7 @@ class UpdateStatus(View):
         return JsonResponse({'response':msg})
 
 class TypeList(ListView):
-    model : Element_Type
+    model = Element_Type
     template_name = 'type_list.html'
     form_class = Element_Type_Form
 
