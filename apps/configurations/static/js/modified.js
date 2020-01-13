@@ -8,6 +8,4 @@ $('#Modal_element_delete').on('show.bs.modal', function (event) {
     modal.find('.modal-footer #delete').val(recipient)
   })
 
- 
-
- 
+  
