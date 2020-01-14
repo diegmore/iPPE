@@ -1,0 +1,63 @@
+{% extends 'base1.html' %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+    <div class="equipmentForm">
+        <div class="col-md-6 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{form.code.id_for_label}}">{{form.code.label}}</label>
+                {{form.code}}
+            </div>
+        </div>
+        <div class="col-md-6 col-md-offset-2 ">
+            <div class="form-group">
+                <label for="{{form.body_area.id_for_label}}">{{form.body_area.label}}</label>
+                {{form.body_area}}
+            </div>
+        </div>
+        <div class="col-md-6 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{form.element_classification.id_for_label}}">{{form.element_classification.label}}</label>
+                {{form.element_classification}}
+            </div>
+        </div>
+        <div class="col-md-6 col-md-offset-2 ">
+            <div class="form-group">
+                <label for="{{form.name.id_for_label}}">{{form.name.label}}</label>
+                {{form.name}}
+            </div>
+        </div>
+        <div class="col-md-6 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{form.description.id_for_label}}">{{form.description.label}}</label>
+                {{form.description}}
+            </div>
+        </div>
+        <div class="col-md-6 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{form.time_of_life.id_for_label}}">{{form.time_of_life.label}}</label>
+                {{form.time_of_life}}
+            </div>
+        <div class="col-md-6 col-md-offset-2">
+            <div class="form-group">
+                <label for="{{form.work_activities.id_for_label}}">{{form.work_activities.label}}</label>
+                {{form.work_activities}}
+            </div>
+        </div>
+    </div>    
+    </div>
+        <div class="AdjustForm">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="submit" class="btn btn-secondary" formnovalidate name="cancel">Cancel</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block tag %}
+<script>
+$(".js-example-tags").select2({
+  tags: true
+});
+</script>
+{% endblock %}

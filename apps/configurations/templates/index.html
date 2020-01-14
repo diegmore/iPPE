@@ -1,0 +1,16 @@
+{% extends 'base1.html' %}
+{% block content %}
+<select class="form-control js-example-tags" multiple="multiple">
+  <option selected="selected">orange</option>
+  <option>white</option>
+  <option selected="selected">purple</option>
+</select>
+{% endblock %}
+
+{% block tag%}
+<script>
+$(".js-example-tags").select2({
+  tags: true
+});
+</script>
+{% endblock %}

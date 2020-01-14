@@ -1,0 +1,48 @@
+
+.logoiXerv{
+    width: 15rem; 
+    /* border:10px blue solid;  */
+    padding: 0 20px 0 0 ;
+    /* float: left; */
+}
+.copyRight{
+    position: relative;
+    /* border: 10px rebeccapurple  solid; */
+    justify-content: left;
+    padding: 0 70% 0 0 ;
+}
+
+.topButtons{
+    display:flex; 
+    flex-direction: row-reverse;
+}
+
+.AdjustForm{
+    position: relative;
+    left: 300px;
+    /* border:10px blue solid;  */
+}
+.ListPosition{
+    position: relative;
+    top: -80px;
+}
+.footerStyle{
+    position: relative;  
+    top: 75%; 
+    display:flex;
+    justify-content: center;
+    width: 82%;
+}
+.SizetopButtons{
+    display:flex; 
+    flex-direction: row;
+    justify-content: space-between;
+    margin:10px
+}
+.equipmentForm{
+    display: flex;
+    flex-direction: row;
+    /* border:10px blue solid; */
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
