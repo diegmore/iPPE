@@ -15,3 +15,5 @@ class Element_Classification(models.Model):
     status = models.BooleanField(null=True)
     create_date = models.DateField(blank=True, null=True, auto_now=True)
     element_type = models.ForeignKey(Element_Type, null=True, blank=True, on_delete=models.SET_NULL)
+    def __str__(self):
+	    return self.name
