@@ -1,12 +1,10 @@
 {% extends 'base1.html' %}
 {% block content %}
 <div class="SizetopButtons ListPosition" >
-  <div class="dropdown">
-    
+  <div class="dropdown">    
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{ filt }}
-      </button>
-    
+      </button>    
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <a class="dropdown-item" href="{% url 'size_config:size_list'%}">All</a>
       {% for configuration in body_part %}
