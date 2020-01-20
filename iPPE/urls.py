@@ -21,7 +21,8 @@ urlpatterns = [
     path('config/', include('apps.configurations.urls', namespace='configurations')),
     path('config/', include('apps.body_configuration.urls', namespace='body_configurations')),
     # path('config/', include('apps.size_configuration.urls', namespace='size_configurations')),
-    path('config/', include('apps.RequestType.urls', namespace='RequestType')),
+    path('config/', include('apps.requestType.urls', namespace='RequestType')),
     path('config/', include('apps.size_configuration.urls', namespace='size_configurations')),
     path('config/', include('apps.equipment.urls', namespace='equipments_configurations')),
+
 ]
