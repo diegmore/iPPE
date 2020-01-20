@@ -42,8 +42,8 @@
                     <td>{{ configurations.description }}</td>
                     <td>{{ configurations.create_date}} </td>
                     <td>
-                    <div class="text-center"> 
-                    <div class="checkbox">
+                    <div class="text-right"> 
+                    <div class="checkbox" >
                         <label>                  
                         <input type="checkbox" class="BodyStatus" data-changestatus="{% url 'body_config:body_status' pk=configurations.id %}" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning" {% if configurations.status is True %}checked{% endif %}>                   
                         </label>

@@ -2,10 +2,13 @@ from django.db import models
 
 # Create your models here.
 class Location(models.Model):
-    name = models.CharField(max_length=20, null=True)
+    name = models.TextField(max_length=20, null=True)
+
+    def __str__(self):
+	    return self.name
 
 class Stockits(models.Model):
-    name = models.CharField(max_length=20, null=True)
+    name = models.TextField(max_length=20, null=True)
     position = models.CharField(max_length=20, null=True)
     
 class Warehouse(models.Model):
