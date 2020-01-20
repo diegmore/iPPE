@@ -1,0 +1,43 @@
+{% extends 'base1.html' %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+    <div class="row">
+		<div class="col-md-6 col-md-offset-2 AdjustForm">
+            <div class="form-group">
+                <label for="{{form.name.id_for_label}}">{{form.name.label}}</label>
+                {{form.name}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+		<div class="col-md-6 col-md-offset-2 AdjustForm">
+            <div class="form-group">
+                <label for="{{form.location.id_for_label}}">{{form.location.label}}</label>
+                {{form.location}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+		<div class="col-md-6 col-md-offset-2 AdjustForm">
+            <div class="form-group">
+                <label for="{{form.addres.id_for_label}}">{{form.addres.label}}</label>
+                {{form.addres}}
+            </div>
+        </div>
+    </div> 
+    <div class="row">
+		<div class="col-md-6 col-md-offset-2 AdjustForm">
+            <div class="form-group">
+                <label for="{{form.phone_number.id_for_label}}">{{form.phone_number.label}}</label>
+                {{form.phone_number}}
+            </div>
+        </div>
+    </div>      
+    <div class="AdjustForm">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button type="submit" class="btn btn-secondary" formnovalidate name="cancel">Cancel</button>
+    </div>
+    </form>
+{% endblock %}
