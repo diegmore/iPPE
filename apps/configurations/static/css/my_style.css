@@ -24,14 +24,13 @@
 }
 .ListPosition{
     position: relative;
-    top: -80px;
 }
 .footerStyle{
     position: relative;  
-    top: 75%; 
     display:flex;
     justify-content: center;
     width: 82%;
+    /* border:10px blue solid;   */
 }
 .SizetopButtons{
     display:flex; 

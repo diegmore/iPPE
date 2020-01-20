@@ -24,5 +24,5 @@ urlpatterns = [
     path('config/', include('apps.requestType.urls', namespace='RequestType')),
     path('config/', include('apps.size_configuration.urls', namespace='size_configurations')),
     path('config/', include('apps.equipment.urls', namespace='equipments_configurations')),
-
+    path('config/', include('apps.warehouses.urls', namespace='warehouses_configurations')),
 ]

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'apps.size_configuration',
     'apps.requestType',
     'apps.equipment',
+    'flatpickr',
+    'apps.warehouses',
 ]
 
 MIDDLEWARE = [

@@ -18,22 +18,23 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/my_style.css' %}" rel="stylesheet">
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.min.css">
-
+  
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/my_style.css' %}" rel="stylesheet">
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.min.css">
+  {% block extra_css %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+  {% endblock %}
 </head>
 
 <body id="page-top">
 
   <!-- Page Wrapper -->
   <div id="wrapper">
-    {% block navbar %}  
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -60,7 +61,7 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        functionalities
+        Functionalities
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
@@ -76,7 +77,8 @@
             <a class="collapse-item" href="{% url 'configurations:element_classification'%}">Element Classification</a>
             <a class="collapse-item" href="{% url 'body_config:body_part'%}">Body Part</a>
             <a class="collapse-item" href="{% url 'size_config:size_list'%}">Sizes</a>
-            <a class="collapse-item" href="{% url 'requestType:ShowList'%}">Request Types</a>
+            <a class="collapse-item" href="{% url 'equipment_config:equipment_list'%}">Equipment</a>
+            <a class="collapse-item" href="{% url 'warehouse_config:warehouses'%}">Warehouses</a>            
           </div>
         </div>
       </li>
@@ -150,8 +152,6 @@
 
     </ul>
     <!-- End of Sidebar -->
-    <!-- End of Content Wrapper -->
-    {% endblock %} 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -340,27 +340,41 @@
 
         </nav>
         <!-- End of Topbar -->
-        <!-- Footer -->
-      <footer class="bg-white footerStyle" >
-        <div class="container my-auto ">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+          {%block content%}
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+          </div>
+
+            </div>
+          </div>
+          
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+      {% endblock %}
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white footerStyle">
+        <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span class="copyRight">Copyright © Your Website 2019</span>
+            <span>Copyright &copy; Your Website 2019</span>
           </div>
         </div>
-        <div class="my-auto logoiXerv">
+         <div class="my-auto logoiXerv">
           <img class="img-fluid px-3 px-sm-4 mt-3 mb-4 " src="/static/img/descarga.png" alt="">
         </div>
-      </footer>    
+      </footer>
       <!-- End of Footer -->
-        {% block content %}
-        <div class="well well-sm">
-         Esté es el contenido del archivo base.
-        </div>
-        {% comment %} Modal block {% endcomment %}
-        {% endblock %}
-      
+
     </div>
-     
+    <!-- End of Content Wrapper -->
+ 
   </div>
   <!-- End of Page Wrapper -->
   
@@ -403,17 +417,11 @@
 
   <!-- Page level custom scripts -->
   <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
-  <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
-  
+  <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>  
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
-  {% autoescape on %}
+{% autoescape on %}
       <script>
           var token = '{{csrf_token}}';
           $(".ClassificationStatus").change(function () {
@@ -448,6 +456,14 @@
           });
       </script>
   {% endautoescape %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>  
+  {% block extra_js %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+  {% endblock %}
+  
 </body>
 </html>
 {% block tag %}
