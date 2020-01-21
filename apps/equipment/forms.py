@@ -46,5 +46,5 @@ class Equipment_Form(forms.ModelForm):
             'end_date' : DatePickerInput(),
             'body_area' : forms.Select(attrs={'class':'form-control'}),
             'element_classification' : forms.Select(attrs={'class':'form-control'}),  
-            'work_activities' : forms.Select(attrs={'class':'form-control js-example-tags','multiple' : 'multiple'}),  
+            'work_activities' : forms.Select(attrs={'class':'form-control wa-tags','multiple' : 'multiple'}),  
         }

@@ -30,3 +30,10 @@ class WarehouseList(ListView):
 
     def get_queryset(self):
         return Warehouse.objects.order_by('id')
+
+    def get_context_data(self, **kwargs):
+        context = super(WarehouseList, self).get_context_data(**kwargs)
+        pk = self.kwargs.get('pk', 0)
+        context['form'] = Warehouse_Form()
+        context['id'] = pk
+        return context

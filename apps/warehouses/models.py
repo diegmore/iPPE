@@ -10,6 +10,9 @@ class Location(models.Model):
 class Stockits(models.Model):
     name = models.TextField(max_length=20, null=True)
     position = models.CharField(max_length=20, null=True)
+    grant_input = models.BooleanField(null=True)
+    grant_output = models.BooleanField(null=True)
+
     
 class Warehouse(models.Model):
     name = models.CharField(max_length=20, null=True)
