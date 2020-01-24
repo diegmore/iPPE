@@ -54,6 +54,7 @@ class BodyDelete(View):
 
     def post(self, request, *args, **kwargs):
         model = BodyPart
+        print(request.POST)
         pk = request.POST['body_part_id']
         data = model.objects.get(id = pk)
         data.delete()
