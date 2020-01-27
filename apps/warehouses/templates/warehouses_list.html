@@ -43,7 +43,7 @@
                     <td>{{ configurations.phone_number}} </td>
                     <td>
                       {{ configurations.warehouse_count}}
-                      <a class="stockist_list" data-stockists="{% url 'warehouse_config:stockist_list' pk=configurations.id %}" data-toggle="modal" data-target="#Modal_list" href="#" ><i class="fas fa-users"></i></a>
+                      <a class="stockist_list" data-urlstockists="{% url 'warehouse_config:stockist_list' %}" data-pk="{{configurations.id}}" data-toggle="modal" data-target="#Modal_list" href="#" ><i class="fas fa-users"></i></a>
                     </td>
                     <td> 
                       <a class="btn btn-warning" href="#" data-toggle="modal" data-target="#Modal_stockist" data-pki="{{configurations.id}}">Add/Edit Responsibles</a>
@@ -127,13 +127,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" >Assign Stockists</h5>
+        <h5 class="modal-title" >Stockists List</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        
+      <div class="modal-body" id="stck">
+
       </div>      
     </div>
   </div>
@@ -143,19 +143,39 @@
   {% autoescape on %}
         <script>
             var token = '{{csrf_token}}';
-            $('#stockist_list').on('show.bs.modal', function (event) {
-            var urlToAjax = $(this).data('stockists');
-            console.log(urlToAjax);
-                $.ajax({
-                    headers: { "X-CSRFToken": token },
-                    url: urlToAjax,
-                    type: 'POST',
-                    data: "status="+$(this).prop("checked"),
-                    dataType: 'json',
-                    success: function (data) {
-                        console.info(data);*/
-                    }
-                });
+            $('#Modal_list').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Button that triggered the modal
+                var urlToAjax = button.data('urlstockists');
+                console.log(urlToAjax);
+                var recipient = button.data('pk'); // Extract info from data-* attributes
+                console.log(recipient);                
+                    $.ajax({
+                        headers: { "X-CSRFToken": token },
+                        url: urlToAjax,
+                        type: 'POST',
+                        data: {'id':recipient},
+                        success: function(data){
+                            var htmldata=""
+                            for(var i = 0; i<data.length; i++){
+                                htmldata += '<div class="card border-left-primary shadow h-100 py-2">\
+                                                <div class="card-body">\
+                                                    <div class="row no-gutters align-items-center">\
+                                                        <div class="col mr-2">\
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Name: '+data[i].fields.name+'</div>\
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Position: '+data[i].fields.position+ '</div>\
+                                                        </div>\
+                                                        <div class="col-auto">\
+                                                            <i class="fas fa-user fa-2x text-gray-300"></i>\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div> <br>'
+                            }
+                            $('#stck').html(htmldata);
+                        }
+                    });
+                var modal = $(this);
+                modal.find('.modal-body #stock').val(recipient)
             });
         </script>
     {% endautoescape %}

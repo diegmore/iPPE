@@ -2,9 +2,10 @@ import json
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView, View
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from datetime import date
 from django.db.models import Count
+from django.core import serializers
 
 from .models import Warehouse, Stockits
 from .forms import Warehouse_Form
@@ -63,14 +64,10 @@ class StockistsGrant(View):
 
 class StockistList(View):
 
-    def post(self, request, pk):
-        print(request.POST)
-    # def post(self, request, pk):
-    #     try:
-    #         classification = Element_Classification.objects.get(id = pk)
-    #         classification.status = bool(request.POST['status'] == 'true')
-    #         classification.save()
-    #         msg = "Success"
-    #     except Exception as e:
-    #         msg = '%s (%s)' % (e.message, type(e))
-    #     return JsonResponse({'response':msg})
+    def post(self, request, *args, **kwargs):
+        id_warehouse = request.POST.get('id') 
+        stockists = Stockits.objects.filter(warehouse=id_warehouse)
+        print(stockists)
+        data = serializers.serialize('json', stockists, fields=('name','position','grant_input','grant_output'))
+        return HttpResponse(data, content_type='application/json')
+    
