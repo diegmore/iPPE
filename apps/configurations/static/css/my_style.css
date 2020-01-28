@@ -26,17 +26,19 @@
     position: relative;
 }
 .footerStyle{
-    position: relative;  
+    position: fixed; 
+    bottom:0; 
     display:flex;
     justify-content: center;
     width: 82%;
     /* border:10px blue solid;   */
 }
+
 .SizetopButtons{
     display:flex; 
     flex-direction: row;
     justify-content: space-between;
-    margin:10px
+    margin:10px;
 }
 .equipmentForm{
     display: flex;
