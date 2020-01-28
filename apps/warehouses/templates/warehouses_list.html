@@ -41,11 +41,14 @@
                     <td>{{ configurations.location }} </td>
                     <td>{{ configurations.addres }}</td>
                     <td>{{ configurations.phone_number}} </td>
-                    <td> </td>
+                    <td>
+                      {{ configurations.warehouse_count}}
+                      <a class="stockist_list" data-urlstockists="{% url 'warehouse_config:stockist_list' %}" data-pk="{{configurations.id}}" data-toggle="modal" data-target="#Modal_list" href="#" ><i class="fas fa-users"></i></a>
+                    </td>
                     <td> 
-                    <a class="btn btn-warning" href="#">Add/Edit Responsibles</a>
-                    <a class="btn btn-primary" href="{%url 'body_config:body_update' configurations.id%}">Edit</a>
-                    <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#Modal_element_delete" data-pk="{{configurations.id}}">Delete</a>              
+                      <a class="btn btn-warning" href="#" data-toggle="modal" data-target="#Modal_stockist" data-pki="{{configurations.id}}">Add/Edit Responsibles</a>
+                      <a class="btn btn-primary" href="{%url 'body_config:body_update' configurations.id%}">Edit</a>
+                      <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#Modal_element_delete" data-pk="{{configurations.id}}">Delete</a>              
                     </td>
                 </tr>
                 {% endfor %}                                  
@@ -83,4 +86,97 @@
     </div>
   </div>
 </div>
+{% comment %} Stockists Modal {% endcomment %}
+<div class="modal fade" id="Modal_stockist" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Assign Stockists</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'warehouse_config:stockists' %}" method="post">
+          {% csrf_token %}			
+          <div class="form-group">
+            <select class = "form-control" name="stockists">
+                <option value="" selected="selected">-------------</option> 
+              {% for configuration in stockists %}
+                <option value="{{ configuration.id }}">{{ configuration.name }} - {{ configuration.position }}</option> 
+              {% endfor %} 
+            </select>
+          </div>
+          <div class="form-group">
+              <label> Grant input                 
+                <input type="checkbox" name="ginput" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning">                   
+              </label>
+              <label> Grant output                 
+                <input type="checkbox" name="goutput" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning">                   
+              </label>
+          </div> 
+          <button type="submit" class="btn btn-primary" id="stock" name="warehouse" value="">Save</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </form>
+      </div>      
+    </div>
+  </div>
+</div>
+{% comment %} Stockists List Modal {% endcomment %}
+<div class="modal fade" id="Modal_list" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Stockists List</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="stck">
+
+      </div>      
+    </div>
+  </div>
+</div>
 {% endblock%}
+{% block extra_jquery %}
+  {% autoescape on %}
+        <script>
+            var token = '{{csrf_token}}';
+            $('#Modal_list').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Button that triggered the modal
+                var urlToAjax = button.data('urlstockists');
+                console.log(urlToAjax);
+                var recipient = button.data('pk'); // Extract info from data-* attributes
+                console.log(recipient);                
+                    $.ajax({
+                        headers: { "X-CSRFToken": token },
+                        url: urlToAjax,
+                        type: 'POST',
+                        data: {'id':recipient},
+                        success: function(data){
+                            var htmldata=""
+                            for(var i = 0; i<data.length; i++){
+                                htmldata += '<div class="card border-left-primary shadow h-100 py-2">\
+                                                <div class="card-body">\
+                                                    <div class="row no-gutters align-items-center">\
+                                                        <div class="col mr-2">\
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Name: '+data[i].fields.name+'</div>\
+                                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Position: '+data[i].fields.position+ '</div>\
+                                                        </div>\
+                                                        <div class="col-auto">\
+                                                            <i class="fas fa-user fa-2x text-gray-300"></i>\
+                                                        </div>\
+                                                    </div>\
+                                                </div>\
+                                            </div> <br>'
+                            }
+                            $('#stck').html(htmldata);
+                        }
+                    });
+                var modal = $(this);
+                modal.find('.modal-body #stock').val(recipient)
+            });
+        </script>
+    {% endautoescape %}
+  {% endblock %}

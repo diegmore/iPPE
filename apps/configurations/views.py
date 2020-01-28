@@ -103,6 +103,7 @@ class ClassificationUpdate(UpdateView):
             return context
 
 class UpdateStatus(View):
+    
     def post(self, request, pk):
         try:
             classification = Element_Classification.objects.get(id = pk)

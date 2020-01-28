@@ -54,7 +54,7 @@ class EquipmentDelete(View):
     template_name = 'equipment_list.html'
 
     def post(self, request, *args, **kwargs):
-        model = Equipment
+        model = Equipment        
         pk = request.POST['equipment_id']
         data = model.objects.get(id = pk)
         data.delete()

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Warehouse
+from .models import Warehouse, Stockits
 class Warehouse_Form(forms.ModelForm):
     class Meta:
         model = Warehouse
@@ -8,7 +8,7 @@ class Warehouse_Form(forms.ModelForm):
             'name',
             'location',
             'addres', 
-            'phone_number',           
+            'phone_number',     
         ]
         labels = {
             'name' : 'Name',
