@@ -156,7 +156,7 @@ class TypeDelete(View):
     def post(self, request, *args, **kwargs):
         model = Element_Type
         pk = request.POST['element_type_id']
-        data = model.objects.get(id = pk)
+        data = Element_Type.objects.get(id = pk)
         data.delete()
         return redirect(reverse_lazy('configurations:type_list'))
 

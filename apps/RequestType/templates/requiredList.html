@@ -3,8 +3,64 @@
 
 {% block content %}
 
-{% if object_list %}
+<div style=" display: flex; flex-direction: row-reverse; ">
+    <a href="{% url 'requestType:CreateRequest'%}" class="btn btn-primary" >Crear nuevo tipo</a>
+</div>
 
+{% if object_list %}
+<div class="card-body" style="justify-content: center;">
+    <div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Element Type</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>#</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Element Type</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </tfoot>
+        <tbody>                    
+            {% for configurations in object_list %}
+            <tr>
+                <td>{{ configurations.id }}</td>
+                <td>{{ configurations.code }} </td>
+                <td>{{ configurations.name }} </td>
+                <td>{{ configurations.detail }}</td>
+                <td>{{ configurations.element_type}} </td>
+                <td>{{ configurations.status}} </td>
+                <td>
+                <div class="text-right"> 
+                <div class="checkbox" >
+                    <label>                  
+                    <input type="checkbox" class="BodyStatus" data-changestatus="{% url 'body_config:body_status' pk=configurations.id %}" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning" {% if configurations.status is True %}checked{% endif %}>                   
+                    </label>
+                </div>
+                </div>
+                </td>
+                <td> 
+                <a class="btn btn-primary" href="">Edit</a>
+                <a class="btn btn-danger" href="{%url 'requestType:DeleteRequest' configurations.id%}" >Delete</a>              
+                </td>
+            </tr>
+            {% endfor %}                                  
+        </tbody>
+    </table>
+    </div>
+</div>
 
 {% else %}
     <h1>there is not content</h1>
