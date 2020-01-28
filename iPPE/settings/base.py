@@ -34,14 +34,15 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.staticfiles',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     'apps.configurations',
     'apps.body_configuration',
     'apps.size_configuration',
     'apps.requestType',
     'apps.equipment',
+    'debug_toolbar',
     'flatpickr',
     'apps.warehouses',
 ]
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'iPPE.urls'
@@ -82,3 +84,7 @@ WSGI_APPLICATION = 'iPPE.wsgi.application'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS=(os.path.join(BASE_DIR,'static'),)
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
