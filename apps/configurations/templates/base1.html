@@ -13,6 +13,8 @@
 
   <title>{% block title %}IPPE aplication{% endblock %}</title>
 
+
+
   <!-- Custom fonts for this template-->
   <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -27,6 +29,12 @@
   {% block extra_css %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
   {% endblock %}
+
+  
+  <link href='http://fonts.googleapis.com/css?family=Courgette' rel='stylesheet' type='text/css'>
+  <link href="{% static 'css/stacktable.css' %}" rel="stylesheet" />
+
+
 </head>
 
 <body id="page-top">
@@ -468,6 +476,34 @@
   {% block extra_js %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
   {% endblock %}
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.min.js"><\/script>')</script> </script>
+
+  <script src="{% static 'stacktable.js'%}" type="text/javascript"></script>
+
+  <script>
+    $(document).on('click', '#run', function(e) {
+      e.preventDefault();
+      $('#simple-example-table').stacktable();
+      $(this).replaceWith('<span>ran - resize your window to see the effect</span>');
+    });
+    $('#responsive-example-table').stacktable({myClass:'your-custom-class'});
+    $('#card-table').cardtable();
+    $('#agenda-example').stackcolumns();
+  </script>
+
+  <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-2821890-9']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+  </script>
+
   
 </body>
 </html>
