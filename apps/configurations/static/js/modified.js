@@ -48,7 +48,7 @@ $('#Modal_element_delete').on('show.bs.modal', function (event) {
                                                                 <input type="checkbox" class="newToggle" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning">\
                                                             </label>\
                                                             <label> Grant output\
-                                                                <input type="checkbox" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning">\
+                                                                <input type="checkbox" class="newToggle" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning">\
                                                             </label>\
                                                         </div>\
                                                     </div>\
@@ -61,7 +61,7 @@ $('#Modal_element_delete').on('show.bs.modal', function (event) {
                         }     
                     }
                     $('#stck').html(htmldata);             
-                    $('.newToggle').bootstrapToggle();
+					$('.newToggle').bootstrapToggle({size: 'normal',});
                 }
             });
         var modal = $(this);
