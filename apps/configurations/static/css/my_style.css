@@ -1,9 +1,9 @@
 
 .logoiXerv{
     width: 15rem; 
+    height: 100%;
     /* border:10px blue solid;  */
     padding: 0 20px 0 0 ;
-    /* float: left; */
 }
 .copyRight{
     position: relative;
@@ -26,12 +26,32 @@
     position: relative;
 }
 .footerStyle{
-    position: fixed; 
+    position: relative; 
     bottom:0; 
     display:flex;
     justify-content: center;
-    width: 82%;
-    /* border:10px blue solid;   */
+    width: 100%;
+    /* border:10px solid green;   */
+    height: 7%;
+}
+
+@media only screen and (max-width: 600px){
+    .footerStyle{
+        position: relative; 
+        bottom:0; 
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        /* border:10px solid green;   */
+        height: 7%;
+    }
+    .logoiXerv{
+        width: 15rem; 
+        height: 100%;
+        margin: auto;
+        padding: 0 20px 0 0 ;
+    }
 }
 
 .SizetopButtons{
