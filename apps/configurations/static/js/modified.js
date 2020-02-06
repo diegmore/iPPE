@@ -43,13 +43,19 @@ $('#Modal_element_delete').on('show.bs.modal', function (event) {
                                                     <div class="col mr-2">\
                                                         <div class="h5 mb-0 font-weight-bold text-gray-800">Name: '+data[i].fields.name+'</div>\
                                                         <div class="h5 mb-0 font-weight-bold text-gray-800">Position: '+data[i].fields.position+ '</div>\
-                                                        <div class="form-group">\
-                                                            <label> Grant input\
-                                                                <input type="checkbox" class="newToggle" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning">\
-                                                            </label>\
-                                                            <label> Grant output\
-                                                                <input type="checkbox" class="newToggle" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning">\
-                                                            </label>\
+														<div class="form-group">\
+														<label> Grant input'+
+														(data[i].fields.grant_input==true ? 
+															'<input type="checkbox" checked class="newToggle" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning">':
+															'<input type="checkbox" class="newToggle" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning">'
+															)
+														+'</label>\
+                                                            <label> Grant output'+
+															(data[i].fields.grant_output==true ? 
+																'<input type="checkbox" checked class="newToggle" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning">':
+																'<input type="checkbox" class="newToggle" data-toggle="toggle" data-on="On" data-off="Off" data-onstyle="warning">'
+																)
+															+'</label>\
                                                         </div>\
                                                     </div>\
                                                     <div class="col-auto">\
@@ -61,7 +67,7 @@ $('#Modal_element_delete').on('show.bs.modal', function (event) {
                         }     
                     }
                     $('#stck').html(htmldata);             
-					$('.newToggle').bootstrapToggle({size: 'normal',});
+					$('.newToggle').bootstrapToggle();
                 }
             });
         var modal = $(this);
